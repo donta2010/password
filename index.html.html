@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Password Generator</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+          <h1>Password Generator</h1>
+        </header>
+        <div class="card">
+          <div class="card-header">
+            <h2>Generate a Password</h2>
+          </div>
+          <div class="card-body">
+            <textarea
+              readonly
+              id="password"
+              placeholder="Your Secure Password"
+              aria-label="Generated Password"
+            ></textarea>
+          </div>
+          <div class="card-footer">
+            <button id="generate" class="btn">Generate Password</button>
+          </div>
+        </div>
+      </div>
+    <script>
+        // Assignment Code
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+  // var password = generatePassword();
+  // var passwordText = document.querySelector("#password");
+
+  // passwordText.value = password;
+        var uppercase ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var lowercase ="abcdefghijklmnopqrstuvwxyz";
+        var specialcase = "!@#$%^&*()";
+        var numbers = "0123456789";
+        var passwordLength = prompt("How many letters would you like the pass to contain?","Please enter a number from 8-128.");
+        var passwordOptions = "";
+        var password = "";
+        while (isNaN(passwordLength)|| 
+        passwordLength <8 || passwordLength> 128){
+          passwordLength = prompt("How many letters would you like the pass to contain?","Please enter a number from 8-128.");
+          console.log(passwordLength);
+        }
+        console.log(passwordLength);
+        var addUppercase =confirm("Would you like the password to contain uppercase letters?");
+        var addLowercase = confirm("Would you like the password to contain lowercase letters?");
+        var addSpecialcharacters = confirm("Would you like the password to contain special chracters?");
+        var addNumbers = confirm("Would you like the password to contain numbers?");
+
+        if (addUppercase="true"){
+
+            var randomUpper = uppercase[Math.floor(Math.random()*uppercase.length)];
+            console.log(randomUpper);
+            passwordOptions = passwordOptions.concat(uppercase);
+            
+        }
+        if (addLowercase="true"){
+
+            var randomLower = lowercase[Math.floor(Math.random()*lowercase.length)];
+            console.log(randomLower);
+            passwordOptions = passwordOptions.concat(lowercase);
+            console.log(passwordOptions);
+        }
+        if (addSpecialcharacters="true"){
+
+            var randomSpecialCase = specialcase[Math.floor(Math.random()*specialcase.length)];
+            console.log(randomSpecialCase);
+            passwordOptions = passwordOptions.concat(specialcase);
+        }
+        if (addNumbers="true"){
+
+            var randomNumber = numbers[Math.floor(Math.random()*numbers.length)];
+            console.log(randomNumber);
+            passwordOptions = passwordOptions.concat(numbers);
+            console.log(passwordOptions);
+        }
+        var beginning = (randomNumber + randomSpecialCase + randomUpper + randomLower);
+        console.log(beginning);
+        console.log(beginning.length);
+        var newPasswordLength = (passwordLength-beginning.length);
+        console.log(passwordOptions)
+        for (var j =0; j<newPasswordLength; j++)
+        {
+           password = password + passwordOptions[Math.floor(Math.random()*passwordOptions.length)]; 
+            
+        }
+        password= password.concat(beginning)
+        alert(password)
+}
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+    </script>
+    
+</body>
+</html>
